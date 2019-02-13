@@ -1,0 +1,536 @@
+@import url("https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe");
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: url("img/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+header {
+  margin: 30px auto;
+  display: flex;
+  flex-flow: column;
+}
+
+header h1 {
+  text-align: center;
+  font-family: "ZCOOL KuaiLe", cursive;
+  font-size: 4rem;
+  margin-top: 5px;
+}
+
+.game-controls {
+  width: 70%;
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #000;
+}
+
+.game-controls div {
+  font-size: 1.2rem;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.game-board {
+  width: 80%;
+  height: 700px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(24, 177, 174, 0.8402135854341737) 2%
+  );
+  border-radius: 5px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  padding: 5px 10px 15px 10px;
+  position: relative;
+  transition: 0.5s;
+}
+
+.the-board {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
+
+.game-side {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  grid-row-gap: 20px;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.leaderboard-side {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 35px 0;
+  transform: rotateY(180deg);
+}
+
+.leaderboard-side h2 {
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  color: #f3f3f3;
+}
+
+.table-data {
+  background: #555;
+}
+
+.leaderboard-side .table-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.intro-container {
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  opacity: 1;
+  transition: 0.5s;
+  backface-visibility: hidden;
+}
+
+.intro-container h1 {
+  text-align: center;
+  font-size: 4em;
+}
+
+.intro-container svg {
+  transition: 0.5s;
+  margin-top: -100px;
+}
+
+.intro-container svg path {
+  cursor: pointer;
+}
+
+.intro-container svg:hover {
+  transform: scale(1.2);
+}
+
+.game-board .outer-box .box,
+.game-board .outer-box .box:before,
+.game-board .outer-box .box:after,
+.game-board .outer-box img {
+  backface-visibility: hidden;
+}
+
+.game-board .box {
+  width: 120px;
+  height: 69.28px;
+  background: #111;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  display: none;
+  transition: 0.5s;
+}
+
+.game-board .box:hover {
+  transform: scale(1.05);
+}
+
+.game-board .box.hidden {
+  width: 0;
+  height: 0;
+}
+
+.game-board .box.hidden:before,
+.game-board .box.hidden:after {
+  height: 0;
+  width: 0;
+}
+
+.game-board .box.incorrect {
+  box-shadow: 0 0 50px red;
+}
+
+.game-board .box.correct {
+  box-shadow: 0 0 50px green;
+}
+
+.game-board .box:before,
+.game-board .box:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 84.85px;
+  height: 84.85px;
+  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+  -ms-transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
+  background-color: inherit;
+  left: 17.5736px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.game-board .box:before {
+  top: -42.4264px;
+}
+
+.game-board .box:after {
+  bottom: -42.4264px;
+}
+
+#timeElapsed {
+  font-size: 2.1em;
+  font-family: "Oxygen";
+  display: flex;
+}
+
+#moves {
+  font-size: 2.1em;
+  font-family: "Oxygen";
+  display: block;
+  text-align: center;
+}
+
+.outer-box {
+  position: relative;
+}
+
+.game-board .outer-box img {
+  position: absolute;
+  z-index: 999;
+  bottom: 5px;
+  right: 20px;
+  border-radius: 5px;
+  width: 0px;
+  height: 0px;
+  transition: 0.5s;
+}
+
+.game-board .outer-box {
+  backface-visibility: hidden;
+}
+
+.game-board .outer-box img.revealed {
+  width: 70%;
+  height: 100%;
+}
+
+.startGame {
+  display: block;
+}
+
+.startGame svg {
+  transition: 0.3s;
+}
+
+.startGame svg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.restartGame {
+  display: none;
+}
+
+.restartGame svg {
+  transition: 0.3s;
+}
+
+.restartGame svg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.leaderboardBtn {
+  padding: 14px 28px;
+  background-image: -webkit-linear-gradient(#4e4749 0%, #1b1919 100%);
+  background-image: linear-gradient(#4e4749 0%, #1b1919 100%);
+  border: 1px solid rgb(33, 33, 33);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+  box-shadow: 0 1px 1px rgba(143, 140, 140, 0.28);
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  width: 200px;
+}
+
+.leaderboardBtn:focus {
+  outline: none;
+}
+
+.leaderboardBtn:active {
+  -ms-transform: translateY(2px);
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  background-image: -webkit-linear-gradient(#4e4749 0%, #312f2f 100%);
+  background-image: linear-gradient(#4e4749 0%, #312f2f 100%);
+}
+
+footer {
+  background: rgba(0, 0, 0, 0.9);
+  height: 90px;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: none;
+}
+
+.modal {
+  z-index: 99999;
+  position: absolute;
+  margin: 10% 15%;
+  height: 400px;
+  width: 900px;
+  background: black;
+  padding: 25px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  border-radius: 5px;
+  display: none;
+  animation-name: modalOpen;
+  animation-duration: 0.5s;
+}
+
+.modal h2 {
+  margin: 0;
+  text-align: center;
+  font-weight: 200;
+  font-size: 2.4em;
+}
+
+.modal table {
+  margin-top: 20px;
+}
+
+table {
+  border: 1px solid #444;
+  width: 70%;
+  border-collapse: collapse;
+  display: table;
+}
+
+table,
+tbody tr th {
+  /* border-bottom: 1px solid #fff; */
+}
+
+td {
+  text-align: center;
+  height: 25px;
+  padding: 15px;
+}
+
+th {
+  height: 50px;
+  background: #333;
+}
+
+thead tr {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.highScore-tag {
+  color: green;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+.playAgain-btn {
+  padding: 34px 88px;
+  background-image: -webkit-linear-gradient(
+    rgb(30, 128, 126) 0%,
+    rgb(24, 177, 174) 100%
+  );
+  background-image: linear-gradient(
+    rgb(30, 128, 126) 0%,
+    rgb(24, 177, 174) 100%
+  );
+  border: 1px solid rgb(33, 33, 33);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+  box-shadow: 0 1px 1px rgba(143, 140, 140, 0.28);
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 50px;
+  font-size: 3em;
+  font-family: "ZCOOL KuaiLe", cursive;
+}
+
+.playAgain-btn:active {
+  -ms-transform: translateY(2px);
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  background-image: -webkit-linear-gradient(
+    rgb(30, 128, 126) 0%,
+    rgb(29, 212, 209) 100%
+  );
+  background-image: linear-gradient(
+    rgb(30, 128, 126) 0%,
+    rgb(29, 212, 209) 100%
+  );
+}
+
+.playAgain-btn:focus {
+  outline: none;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 1132px) {
+  .modal {
+    margin: 10% 5%;
+  }
+}
+
+@media screen and (max-width: 997px) {
+  .modal {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .game-controls div {
+    font-size: 0.9rem;
+    margin-right: 5px;
+  }
+
+  .leaderboardBtn {
+    width: 120px;
+    padding: 14px 10px;
+  }
+
+  .game-board {
+    height: 1110px;
+  }
+
+  .game-side {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .intro-container {
+    top: 50px;
+  }
+
+  .modal {
+    margin: 10% 10%;
+    width: 450px;
+  }
+  .playAgain-btn {
+    padding: 15px 25px;
+    font-size: 2em;
+  }
+  .highScore-tag {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 556px) {
+  .game-controls {
+    width: 95%;
+  }
+  .intro-container h1 {
+    display: none;
+  }
+
+  .intro-container {
+    top: 100px;
+  }
+
+  .intro-container svg {
+    height: 340px;
+    width: 340px;
+  }
+  .game-board {
+    height: 500px;
+  }
+
+  .game-side {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal {
+    margin: 10% 15%;
+    width: 250px;
+  }
+  .playAgain-btn {
+    padding: 15px 25px;
+    font-size: 2em;
+  }
+  .highScore-tag {
+    display: none !important;
+  }
+}
